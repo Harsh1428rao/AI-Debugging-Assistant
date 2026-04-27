@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ path: require("path").join(__dirname, ".env") });
 const express = require("express");
 const cors = require("cors");
 const { v4: uuidv4 } = require("uuid");
@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
     message: err.message || "Something went wrong",
   });
 });
-console.log("API KEY loaded:", process.env.ANTHROPIC_API_KEY ? "YES ✅" : "NO ❌");
+console.log("API KEY loaded:", process.env.OPENAI_API_KEY ? "YES ✅" : "NO ❌");
 app.listen(PORT, () => {
   console.log(`🚀 AI Debug Assistant backend running on port ${PORT}`);
 });

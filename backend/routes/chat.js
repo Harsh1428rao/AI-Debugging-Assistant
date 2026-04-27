@@ -1,9 +1,9 @@
 const express = require("express");
-const Anthropic = require("@anthropic-ai/sdk");
+const OpenAI = require("openai");
 const { getSession, saveSession } = require("../middleware/sessionStore");
 
 const router = express.Router();
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const CHAT_SYSTEM_PROMPT = `You are an expert debugging assistant. You have previously analyzed an error/log and are now answering follow-up questions.
 Be concise, technical, and helpful. When providing code examples, use proper markdown code blocks with language identifiers.
@@ -31,14 +31,15 @@ router.post("/", async (req, res) => {
       { role: "user", content: message },
     ];
 
-    const response = await client.messages.create({
-      model: "claude-opus-4-5",
-      max_tokens: 2048,
-      system: CHAT_SYSTEM_PROMPT,
-      messages,
-    });
-
-    const assistantMessage = response.content[0].text;
+      const response = await client.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        max_tokens: 2048,
+        messages: [
+          { role: "system", content: CHAT_SYSTEM_PROMPT },
+          ...messages
+        ],
+      });
+      const assistantMessage = response.choices[0].message.content;
 
     session.chatHistory.push(
       { role: "user", content: message },

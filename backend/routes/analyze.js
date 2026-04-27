@@ -1,13 +1,13 @@
 const express = require("express");
 const multer = require("multer");
-const Anthropic = require("@anthropic-ai/sdk");
+const OpenAI = require("openai");
 const { v4: uuidv4 } = require("uuid");
 const { saveSession, getSession } = require("../middleware/sessionStore");
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 } });
 
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const SYSTEM_PROMPT = `You are an expert debugging assistant with deep knowledge of software systems, programming languages, and common error patterns.
 
@@ -56,19 +56,17 @@ router.post("/", upload.single("logFile"), async (req, res) => {
       return res.status(400).json({ error: "No log content provided" });
     }
 
-    const message = await client.messages.create({
-      model: "claude-opus-4-5",
-      max_tokens: 4096,
-      system: SYSTEM_PROMPT,
-      messages: [
-        {
-          role: "user",
-          content: `Please analyze the following log/error:\n\n\`\`\`\n${logContent}\n\`\`\``,
-        },
-      ],
-    });
+    const message = await client.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    max_tokens: 4096,
+     messages: [
+      { role: "system", content: SYSTEM_PROMPT },
+      { role: "user", content: `Analyze this log:\n\n${logContent}` }
+       ],
+      });
+     const responseText = message.choices[0].message.content;
 
-    const responseText = message.content[0].text;
+    
     let analysis;
 
     try {
