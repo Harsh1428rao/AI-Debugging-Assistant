@@ -7,7 +7,7 @@ const features = [
   { icon: MessageSquare, title: "Follow-up Chat", desc: "Ask follow-up questions and dive deeper into any aspect of the bug.", color: "text-terminal-cyan" },
   { icon: History, title: "Debug History", desc: "All your sessions saved. Revisit, compare, and learn from past bugs.", color: "text-terminal-purple" },
   { icon: Shield, title: "Pattern Detection", desc: "Spot recurring error patterns across your codebase.", color: "text-terminal-amber" },
-  { icon: Zap, title: "Instant Analysis", desc: "Powered by Claude AI for fast, accurate, and comprehensive debugging.", color: "text-terminal-green" },
+  { icon: Zap, title: "Instant Analysis", desc: "Powered by Kabir for fast, accurate, and comprehensive debugging.", color: "text-terminal-green" },
 ];
 
 const exampleErrors = [

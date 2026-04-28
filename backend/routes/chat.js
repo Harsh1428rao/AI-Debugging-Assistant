@@ -1,9 +1,10 @@
 const express = require("express");
-const OpenAI = require("openai");
+const Groq = require("groq-sdk");
 const { getSession, saveSession } = require("../middleware/sessionStore");
 
 const router = express.Router();
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
 
 const CHAT_SYSTEM_PROMPT = `You are an expert debugging assistant. You have previously analyzed an error/log and are now answering follow-up questions.
 Be concise, technical, and helpful. When providing code examples, use proper markdown code blocks with language identifiers.
@@ -32,7 +33,7 @@ router.post("/", async (req, res) => {
     ];
 
       const response = await client.chat.completions.create({
-        model: "gpt-3.5-turbo",
+        model: "llama-3.3-70b-versatile",
         max_tokens: 2048,
         messages: [
           { role: "system", content: CHAT_SYSTEM_PROMPT },

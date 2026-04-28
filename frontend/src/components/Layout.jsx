@@ -58,7 +58,7 @@ export default function Layout({ children }) {
             <span>System Online</span>
           </div>
           <div className="mt-2 text-xs font-mono text-terminal-muted/60">
-            Powered by Claude AI
+            Powered by Kabir Chat
           </div>
         </div>
       </aside>

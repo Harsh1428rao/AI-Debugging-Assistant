@@ -1,13 +1,13 @@
 const express = require("express");
 const multer = require("multer");
-const OpenAI = require("openai");
+const Groq = require("groq-sdk");
 const { v4: uuidv4 } = require("uuid");
 const { saveSession, getSession } = require("../middleware/sessionStore");
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 5 * 1024 * 1024 } });
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const SYSTEM_PROMPT = `You are an expert debugging assistant with deep knowledge of software systems, programming languages, and common error patterns.
 
@@ -57,14 +57,14 @@ router.post("/", upload.single("logFile"), async (req, res) => {
     }
 
     const message = await client.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    max_tokens: 4096,
-     messages: [
-      { role: "system", content: SYSTEM_PROMPT },
-      { role: "user", content: `Analyze this log:\n\n${logContent}` }
-       ],
-      });
-     const responseText = message.choices[0].message.content;
+      model: "llama-3.3-70b-versatile",
+      max_tokens: 4096,
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: `Analyze this log:\n\n${logContent}` }
+      ],
+    });
+    const responseText = message.choices[0].message.content;
 
     
     let analysis;
