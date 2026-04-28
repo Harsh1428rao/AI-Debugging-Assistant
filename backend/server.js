@@ -12,12 +12,17 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
   methods: ["GET", "POST", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+
+app.use((req, res, next) => {
+  console.log("Incoming request:", req.method, req.url);
+  next();
+});
 
 // Health check
 app.get("/health", (req, res) => {
