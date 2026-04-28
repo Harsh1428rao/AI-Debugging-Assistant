@@ -2,7 +2,7 @@
 
 > Paste logs. Get instant AI root-cause analysis, code fixes, and follow-up chat.
 
-![Tech Stack](https://img.shields.io/badge/React-18-blue) ![Node](https://img.shields.io/badge/Node.js-20-green) ![Claude AI](https://img.shields.io/badge/Claude-AI-orange)
+![Tech Stack](https://img.shields.io/badge/React-18-blue) ![Node](https://img.shields.io/badge/Node.js-20-green) ![Groq AI](https://img.shields.io/badge/groq-AI-orange)
 
 ---
 
@@ -10,7 +10,7 @@
 
 ### Prerequisites
 - Node.js v18+
-- An [Anthropic API Key](https://console.anthropic.com)
+- An [Groq API Key](https://console.groq.com)
 
 ### 1. Clone the Repository
 ```bash
@@ -144,7 +144,7 @@ Then redeploy.
 ### Backend (`backend/.env`)
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `ANTHROPIC_API_KEY` | Your Claude API key | `sk-ant-...` |
+| `ANTHROPIC_API_KEY` | Your Groq API key | `sk-ant-...` |
 | `PORT` | Server port | `5000` |
 | `FRONTEND_URL` | Allowed CORS origin | `http://localhost:3000` |
 
@@ -175,7 +175,7 @@ Then redeploy.
 | Frontend | React 18, Vite, Tailwind CSS |
 | Routing | React Router v6 |
 | HTTP Client | Axios |
-| AI | Anthropic Claude API |
+| AI | Groq API |
 | Backend | Node.js, Express |
 | File Upload | Multer |
 | Session Storage | In-memory Map (upgrade to Redis for production) |
