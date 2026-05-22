@@ -23,7 +23,7 @@ cd ai-debug-assistant
 cd backend
 npm install
 cp .env.example .env
-# Edit .env and add your ANTHROPIC_API_KEY
+# Edit .env and add your GROQ_API_KEY
 npm run dev
 # Backend runs on http://localhost:5000
 ```
@@ -144,7 +144,7 @@ Then redeploy.
 ### Backend (`backend/.env`)
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `ANTHROPIC_API_KEY` | Your Groq API key | `sk-ant-...` |
+| `GROQ_API_KEY` | Your Groq API key | `sk-ant-...` |
 | `PORT` | Server port | `5000` |
 | `FRONTEND_URL` | Allowed CORS origin | `http://localhost:3000` |
 
