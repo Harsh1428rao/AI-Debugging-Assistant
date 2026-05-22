@@ -23,8 +23,7 @@ cd ai-debug-assistant
 cd backend
 npm install
 cp .env.example .env
-# Edit .env and add your GROQ_API_KEY
-
+# Edit .env and add your ANTHROPIC_API_KEY
 npm run dev
 # Backend runs on http://localhost:5000
 ```
@@ -108,8 +107,7 @@ git push -u origin main
    - **Start Command**: `npm start`
    - **Environment**: Node
 5. Add **Environment Variables**:
-   - `GROQ_API_KEY
-` = your key from console.anthropic.com
+   - `GROQ_API_KEY` = your key from console.anthropic.com
    - `FRONTEND_URL` = (add after Vercel deploy, e.g. `https://your-app.vercel.app`)
    - `NODE_ENV` = `production`
 6. Click **Deploy** → Copy the URL (e.g., `https://ai-debug-backend.onrender.com`)
@@ -146,8 +144,7 @@ Then redeploy.
 ### Backend (`backend/.env`)
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `GROQ_API_KEY
-` | Your Groq API key | `sk-ant-...` |
+| `ANTHROPIC_API_KEY` | Your Groq API key | `sk-ant-...` |
 | `PORT` | Server port | `5000` |
 | `FRONTEND_URL` | Allowed CORS origin | `http://localhost:3000` |
 
